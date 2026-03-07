@@ -37,7 +37,7 @@ If you find our code or paper helpful, please consider starring our repository a
 
 ## News
 
-- [2026-03-07] **Note: We have updated the pre-trained 272-dimensional model and its SAE with better checkpoints. If you downloaded the version from the initial commit, please run prepare/download_models.sh again to get the latest version.**
+- [2026-03-07] **Note: We have updated the pre-trained 272-dimensional model and its SAE with better checkpoints. If you downloaded the version from the initial commit, please run ```prepare/download_models.sh``` again to get the latest version.**
 - [2026-03-07] Motion generation demo released.
 - [2026-02-21] MoLingo is accepted at CVPR 2026!
 - [2026-02-16] Evaluation scripts released
@@ -174,6 +174,8 @@ python mogen/demo.py -a 1 -i assets/example.txt -b {your_smpl_model_path}
 * This 272D model uses a temporal downscaling rate of ```2×``` and a ```32-d``` latent dimension (instead of ```4x16```). We found that, for the 272D model, finer temporal resolution and a richer latent space significantly improve motion quality.
 * By default, we set the ```acc``` parameter to ```1``` to achieve the best practical motion generation quality. You can increase it for faster generation in scenarios such as evaluation.
 * We still conduct standard evaluation on the HumanML3D-based representation with a ```4×16``` latent size to ensure fair comparison with existing methods, as discussed in our paper and the next ```Evaluation``` section.
+
+</details>
 
 ## Evaluation
 
