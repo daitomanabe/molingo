@@ -172,7 +172,7 @@ python mogen/demo.py -a 1 -i assets/example.txt -b {your_smpl_model_path}
 
 ### Some thoughts:
 
-* We provide the motion generation script only for the 272-dimensional model, as we recommend using this improved representation. It allows us to directly extract the rotation component from the output, avoiding potential errors introduced by IK.
+* We provide the motion generation script **ONLY** for the 272-dimensional model, as we recommend using this improved representation. It allows us to directly extract the rotation component from the output, avoiding potential errors introduced by IK.
 * This 272D model uses a temporal downscaling rate of ```2×``` and a ```32-d``` latent dimension (instead of ```4x16```). We found that, for the 272D model, finer temporal resolution and a richer latent space significantly improve motion quality.
 * By default, we set the ```acc``` parameter to ```1``` to achieve the best practical motion generation quality. You can increase it for faster generation in scenarios such as evaluation.
 * We still conduct standard evaluation on the HumanML3D-based representation with a ```4×16``` latent size to ensure fair comparison with existing methods, as discussed in our paper and the next ```Evaluation``` section.
