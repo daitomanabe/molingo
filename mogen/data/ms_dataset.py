@@ -43,7 +43,6 @@ class Text2MotionDatasetMS(data.Dataset):
                 motion = np.load(pjoin(opt.motion_dir, name + '.npy'))
 
                 if (len(motion)) < min_motion_len or (len(motion) >= max_thred):
-                    # print(len(motion))
                     continue
 
                 text_data = []

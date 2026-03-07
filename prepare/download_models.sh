@@ -20,15 +20,15 @@ cd ../ms/
 
 # molingo 272
 echo -e "Downloading SAE model for 272-dim HumanML3D representation"
-wget https://nc.mlcloud.uni-tuebingen.de/index.php/s/CgdDmnRKb8ERNca/download/sae_ms_l2_4_16_1024_d3_kl_1e-05_zero.zip
+wget https://nc.mlcloud.uni-tuebingen.de/index.php/s/3kcCBagkFtmf2n7/download/sae_ms_l2_2_32_1024_d3_kl_1e-05_zero_cos_0.001.zip
 echo -e "Downloading MoLingo model for 272-dim HumanML3D representation"
-wget https://nc.mlcloud.uni-tuebingen.de/index.php/s/GHG7RtsqFLRysEk/download/pretrained_model_272.zip
+wget https://nc.mlcloud.uni-tuebingen.de/index.php/s/DdbAzge4WrRmFzf/download/pretrained_model_272.zip
 echo -e "Unzipping SAE model 272"
-unzip sae_ms_l2_4_16_1024_d3_kl_1e-05_zero.zip
+unzip sae_ms_l2_2_32_1024_d3_kl_1e-05_zero_cos_0.001.zip
 echo -e "Unzipping MoLingo model 272"
 unzip pretrained_model_272.zip
 echo -e "Cleaning SAE model 272"
-rm sae_ms_l2_4_16_1024_d3_kl_1e-05_zero.zip
+rm sae_ms_l2_2_32_1024_d3_kl_1e-05_zero_cos_0.001.zip
 echo -e "Cleaning MoLingo model 272"
 rm pretrained_model_272.zip
 

@@ -23,29 +23,30 @@
     <img src='https://img.shields.io/badge/Project-Page-green?style=flat&logo=Google%20chrome&logoColor=green'></a>
 </p>
 
-![](./assets/teaser.png)
+![](./assets/teaser.gif)
 
 If you find our code or paper helpful, please consider starring our repository and citing:
 ```
-@misc{he2025molingo,
-      title={MoLingo: Motion-Language Alignment for Text-to-Motion Generation}, 
-      author={Yannan He and Garvita Tiwari and Xiaohan Zhang and Pankaj Bora and Tolga Birdal and Jan Eric Lenssen and Gerard Pons-Moll},
-      year={2025},
-      eprint={2512.13840},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2512.13840}, 
-}
+@inproceedings{he2026molingo,
+      title={MoLingo: Motion–Language Alignment for Text-to-Human Motion Generation},
+      author={He, Yannan and Tiwari, Garvita and Zhang, Xiaohan and Bora, Pankaj and Birdal, Tolga and Lenssen, Jan Eric and Pons-Moll, Gerard},
+      booktitle={CVPR},
+      year={2026}
+  }
 ```
 
 ## News
-- [2025-12-15] Publish the paper on arXiv
+
+- [2026-03-07] **Note: We have updated the pre-trained 272-dimensional model and its SAE with better checkpoints. If you downloaded the version from the initial commit, please run prepare/download_models.sh again to get the latest version.**
+- [2026-03-07] Motion generation demo released.
+- [2026-02-21] MoLingo is accepted at CVPR 2026!
 - [2026-02-16] Evaluation scripts released
-- [2026-02-21] MoLingo is accepted at CVPR 2026, see you in Denver!
+- [2025-12-15] Publish the paper on arXiv
+
 
 ## TODO
 - [x] Release the evaluation pipeline
-- [ ] Release the motion generation pipeline
+- [x] Release the motion generation pipeline
 - [ ] Release the training script for the SAE
 - [ ] Release the training script for the MoLingo model
 - [ ] Release the G1 tracking pipeline
@@ -153,7 +154,26 @@ bash prepare/download_models.sh
 
 ## Demo
 
-Coming soon
+<details>
+
+```
+python mogen/demo.py -a 1 -i assets/example.txt -b {your_smpl_model_path}
+```
+
+### Notes:
+
+* ```-a``` denotes the acceleration ratio, meaning that ```a``` latents are sampled in each sampling iteration.
+* An example of prompt file is given in ```./assets/example.txt```. Please follow the format of ```<text description>#<motion duration in seconds>``` at each line. The generated motions are in 30 fps.
+* If you write ```<text description>#NA```, we will call the length estimator from  [MoMask](https://github.com/EricGuo5513/momask-codes) to determine a length. Note once there is one NA, all the others will be NA automatically.
+* To render the animation video, we first apply FK to obtain the body joints. Be sure to specify the SMPL model path with ```-b```, replacing it with your own path. Follow [this](https://github.com/vchoutas/smplx#downloading-the-model) link for the instruction on setting it up.
+ The ```-b``` should have [this](https://github.com/vchoutas/smplx#model-loading) structure.
+
+### Some thoughts:
+
+* We provide the motion generation script only for the 272-dimensional model, as we recommend using this improved representation. It allows us to directly extract the rotation component from the output, avoiding potential errors introduced by IK.
+* This 272D model uses a temporal downscaling rate of ```2×``` and a ```32-d``` latent dimension (instead of ```4x16```). We found that, for the 272D model, finer temporal resolution and a richer latent space significantly improve motion quality.
+* By default, we set the ```acc``` parameter to ```1``` to achieve the best practical motion generation quality. You can increase it for faster generation in scenarios such as evaluation.
+* We still conduct standard evaluation on the HumanML3D-based representation with a ```4×16``` latent size to ensure fair comparison with existing methods, as discussed in our paper and the next ```Evaluation``` section.
 
 ## Evaluation
 
@@ -178,4 +198,4 @@ python mogen/eval_mogen.py -d 272 -c 7.0 -a 5 -r 20 -dr {your_data_root}
 
 This code is standing on the shoulders of giants, we would like to thank the following contributors that our code is based on:
 
-[MAR](https://github.com/LTH14/mar/), [TMR](https://github.com/Mathux/TMR/)  [rectified-flow](https://github.com/lqiang67/rectified-flow/tree/main), [MoMask](https://github.com/EricGuo5513/momask-codes), [HumanML3D](https://github.com/EricGuo5513/HumanML3D), [MotionStreamer](https://github.com/zju3dv/MotionStreamer), [272-dim-Motion-Representation](https://github.com/Li-xingXiao/272-dim-Motion-Representation), [MARDM](https://github.com/neu-vi/MARDM)
+[MAR](https://github.com/LTH14/mar/), [TMR](https://github.com/Mathux/TMR/),  [rectified-flow](https://github.com/lqiang67/rectified-flow/tree/main), [MoMask](https://github.com/EricGuo5513/momask-codes), [HumanML3D](https://github.com/EricGuo5513/HumanML3D), [MotionStreamer](https://github.com/zju3dv/MotionStreamer), [272-dim-Motion-Representation](https://github.com/Li-xingXiao/272-dim-Motion-Representation), [MARDM](https://github.com/neu-vi/MARDM)

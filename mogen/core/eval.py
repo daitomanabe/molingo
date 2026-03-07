@@ -175,11 +175,8 @@ def eval_molingo_ms(val_loader, model_without_ddp, vae_model, ep, cfg,
                 motionencoder, textencoder,
                 temperature=1., std_factor=1., acc_ratio=1.):
 
-
     tmr_real_list, tmr_pred_list = [], []
-
     RP_tmr_real, RP_tmr_pred = 0, 0
-
     matching_score_tmr_real, matching_score_tmr_pred = 0, 0
 
     nb_sample = 0
